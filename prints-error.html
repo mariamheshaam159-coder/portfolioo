@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="error-page">
+
+<a class="kitty-nav-return" href="prints.html" aria-label="Back to previous page">
+  <span class="kitty-nav-return-icon">‹</span>
+  <span class="kitty-nav-return-text">Back</span>
+</a>
+
+  <main class="portfolio-shell error-shell">
+    <div class="error-bg-layer" aria-hidden="true"></div>
+
+    <section class="error-content" aria-labelledby="error-title">
+      <h1 class="error-code" id="error-title">404</h1>
+
+      <div class="error-message-row" role="presentation">
+        <img class="error-accent error-accent-left" src="assets/error-accent-left.png" alt="" aria-hidden="true" />
+        <p class="error-message">Ooops! This page got a little lost</p>
+        <img class="error-accent error-accent-right" src="assets/error-accent-right.png" alt="" aria-hidden="true" />
+      </div>
+
+      <div class="error-scene">
+        <img class="error-bubble" src="assets/error-speech-bubble.png" alt="Even the cutest pages take a wrong turn sometimes" />
+        <img class="error-kitty" src="assets/error-dizzy-kitty.png" alt="Cute dizzy Hello Kitty style illustration" />
+      </div>
+
+      <button onclick="window.location.href='musee-race.html'" class="error-back-btn" type="button" id="errorBackBtn">View Designs Instead</button>
+    </section>
+  </main>
+
+  <script>
+    const errorBackBtn = document.getElementById('errorBackBtn');
+    if (errorBackBtn) {
+      errorBackBtn.addEventListener('click', () => {
+        if (window.history.length > 1) {
+          window.window.location.href='musee-race.html';
+        } else {
+          window.location.href = 'home.html';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

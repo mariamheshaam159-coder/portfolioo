@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | My Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Inter:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800;1,900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="contact-page">
+  <main class="portfolio-shell contact-shell" aria-label="Contact page frame">
+    <section class="contact-layout">
+      <img class="peek-cat" src="assets/contact-kitty.png" alt="" aria-hidden="true" />
+
+      <article class="postcard" id="postcard">
+        <div class="postcard-left">
+          <h1><span class="contact-post-card-title">Post Card</span></h1>
+          <p class="message-copy">Interested in working together? Send<br>me a message and let’s create<br>something meaningful</p>
+
+          <div class="contact-links">
+            <h2><span class="contact-lets-contact-title">Let’s Contact</span></h2>
+            <div class="icons">
+              <a href="https://www.behance.net/" target="_blank" rel="noreferrer" aria-label="Behance"><span class="behance-text"><span>B</span><span class="behance-e">e</span></span></a>
+              <a class="email-icon" href="mailto:hello@example.com" aria-label="Email">
+                <svg viewBox="0 0 64 44" aria-hidden="true">
+                  <rect x="3" y="3" width="58" height="38" rx="1.5"></rect>
+                  <path d="M5 5 L32 25 L59 5"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <form class="postcard-form">
+          <div class="stamp-box" id="stampDrop" aria-label="Drop stamp here"></div>
+
+          <label>Name :<input type="text" name="name" aria-label="Name" /></label>
+          <label>Email :<input type="email" name="email" aria-label="Email" /></label>
+          <textarea name="message" placeholder="Message" aria-label="Message"></textarea>
+          <button type="submit" aria-label="Send message">Send</button>
+        </form>
+      </article>
+
+      <aside class="stamp-area" aria-label="Drag stamp area">
+        <p>Drag the stamp on the<br>post card</p>
+        <img class="pink-arrow" src="assets/pink-arrow.png" alt="" aria-hidden="true" />
+
+        <div class="stamps">
+          <img src="assets/stamp-30.png" class="stamp stamp-a" alt="Stamp 30" draggable="true" />
+          <img src="assets/stamp-12.png" class="stamp stamp-b" alt="Stamp 12" draggable="true" />
+          <img src="assets/stamp-20.png" class="stamp stamp-c" alt="Stamp 20" draggable="true" />
+          <img src="assets/stamp-45.png" class="stamp stamp-d" alt="Stamp 45" draggable="true" />
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+
+<footer class="contact-footer" aria-label="Portfolio footer">
+  <img class="contact-footer-bg" src="assets/contact-footer-bg.png" alt="" aria-hidden="true">
+
+  <div class="contact-footer-content">
+    <div class="contact-footer-col contact-footer-services">
+      <p class="footer-heading">SERVICES</p>
+      <a href="branding.html">Branding</a>
+      <a href="editing.html">Video Editing</a>
+      <a href="prints.html">Prints</a>
+    </div>
+
+    <div class="contact-footer-col contact-footer-links">
+      <p class="footer-heading">ABOUT US</p>
+      <a href="about-me.html">About</a>
+      <a href="service.html">Services</a>
+      <a href="tools-cart.html">Tools</a>
+      <a href="work.html">Work</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="contact-footer-center">
+      <div class="footer-logo-line">
+        <img class="contact-footer-logo" src="assets/contact-footer-logo.png" alt="Mariam Hesham logo">
+        <strong>Mariam Hesham</strong>
+      </div>
+      <a href="tel:01064508966">01064508966</a>
+      <a href="mailto:mariam.heshaam159@gmail.com">mariam.heshaam159@gmail.com</a>
+    </div>
+
+    <div class="contact-footer-cat-area">
+      <img class="contact-footer-cat" src="assets/contact-footer-cat.png" alt="Hello Kitty">
+      <a href="tel:01064508966" aria-label="Call me">
+        <img class="contact-footer-call" src="assets/contact-footer-call.png" alt="Call me">
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-footer-bottom">
+    <span>© 2026 — Copyright</span>
+    <img class="contact-footer-social" src="assets/contact-footer-social.png" alt="Social media links">
+    <span>Privacy</span>
+  </div>
+</footer>
+
+<script>
+  (() => {
+    const scrollUpPage = "work.html";
+    const scrollDownPage = null;
+    const scrollDelay = 1300;
+    let locked = false;
+
+    function canNavigate(event) {
+      const target = event.target;
+      if (!target || !target.closest) return true;
+      return !target.closest("input, textarea, select, button, a, .modal, .popup, .scrollable, [data-normal-scroll]");
+    }
+
+    function goTo(page) {
+      if (!page || locked) return;
+      locked = true;
+      document.body.classList.add("page-scroll-leaving");
+      setTimeout(() => {
+        window.location.href = page;
+      }, 280);
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (!canNavigate(event)) return;
+      if (locked) {
+        event.preventDefault();
+        return;
+      }
+
+      if (Math.abs(event.deltaY) < 40) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (event.deltaY > 0 && scrollDownPage && atBottom) {
+        event.preventDefault();
+        goTo(scrollDownPage);
+      }
+
+      if (event.deltaY < 0 && scrollUpPage && atTop) {
+        event.preventDefault();
+        goTo(scrollUpPage);
+      }
+    }, { passive: false });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      if (!canNavigate(event)) return;
+      touchStartY = event.touches && event.touches[0] ? event.touches[0].clientY : null;
+    }, { passive: true });
+
+    window.addEventListener("touchend", (event) => {
+      if (touchStartY === null || locked) return;
+
+      const touchEndY = event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientY : null;
+      if (touchEndY === null) return;
+
+      const diff = touchStartY - touchEndY;
+      touchStartY = null;
+
+      if (Math.abs(diff) < 60) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (diff > 0 && scrollDownPage && atBottom) {
+        goTo(scrollDownPage);
+      }
+
+      if (diff < 0 && scrollUpPage && atTop) {
+        goTo(scrollUpPage);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

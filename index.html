@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="loading-page">
+  <main class="loading-screen" aria-label="Loading page">
+    <img class="loading-cat" src="assets/loading-cat-clean.png" alt="Sleeping cute cat" />
+
+    <h1 class="loading-title" aria-label="Loading">
+      <span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span>
+    </h1>
+
+    <div class="loading-bar" aria-hidden="true">
+      <div class="loading-progress"></div>
+      <img class="loading-bow" src="assets/loading-bow-clean.png" alt="" />
+    </div>
+  </main>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = 'home.html';
+    }, 2600);
+  </script>
+
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>

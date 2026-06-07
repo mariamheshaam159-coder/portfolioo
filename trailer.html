@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trailer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="teaser-page">
+
+<a class="kitty-nav-return" href="editing.html" aria-label="Back to previous page">
+  <span class="kitty-nav-return-icon">‹</span>
+  <span class="kitty-nav-return-text">Back</span>
+</a>
+
+  <main class="teaser-screen">
+
+    <h1 class="teaser-title">Trailer</h1>
+
+    <section class="teaser-stamp-wrap" aria-label="Maleficent trailer">
+      <button class="teaser-play-trigger" type="button" aria-label="Play trailer video">
+        <img class="teaser-stamp" src="assets/trailer-cover.png" alt="Maleficent trailer cover">
+      </button>
+
+      <video class="teaser-video" src="assets/trailer-video.mp4" controls playsinline></video>
+    </section>
+  </main>
+
+  <script>
+    const teaserTrigger = document.querySelector('.teaser-play-trigger');
+    const teaserVideo = document.querySelector('.teaser-video');
+
+    if (teaserTrigger && teaserVideo) {
+      teaserTrigger.addEventListener('click', () => {
+        teaserTrigger.classList.add('is-hidden');
+        teaserVideo.classList.add('is-active');
+        teaserVideo.play();
+      });
+    }
+  </script>
+</body>
+</html>

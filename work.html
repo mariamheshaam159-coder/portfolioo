@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Inter:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="work-page">
+  <main class="portfolio-shell work-shell">
+    <nav class="work-category-nav" aria-label="Work categories">
+      
+        
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="branding">Branding</button>
+        <button data-filter="prints">Prints</button>
+        <button data-filter="editing">Editing</button>
+</nav>
+
+    <section class="work-folders-reference">
+      <article class="work-folder-card work-folder-branding" data-category="branding" data-link="branding.html">
+        <img src="assets/work-cover-branding.png" alt="Branding folder cover">
+        <a class="work-folder-label work-folder-label-link" href="branding.html" style="font-family: Inter, Arial, sans-serif !important; font-weight: 900 !important;">Branding</a>
+      </article>
+<article class="work-folder-card work-folder-prints" data-category="prints" data-link="prints.html">
+        <img src="assets/work-cover-prints.png" alt="Prints folder cover">
+        <a class="work-folder-label work-folder-label-link" href="prints.html" style="font-family: Inter, Arial, sans-serif !important; font-weight: 900 !important;">Prints</a>
+      </article>
+<article class="work-folder-card work-folder-Editing" data-category="editing" data-link="editing.html">
+        <img src="assets/work-cover-editing.png" alt="Editing folder cover">
+        <a class="work-folder-label work-folder-label-link" href="editing.html" style="font-family: Inter, Arial, sans-serif !important; font-weight: 900 !important;">Editing</a>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.work-category-nav button');
+    const cards = document.querySelectorAll('.work-folder-card');
+
+    cards.forEach((card) => {
+      card.addEventListener('click', (event) => {
+        const link = card.dataset.link;
+        if (link) window.location.href = link;
+      });
+    });
+
+    document.querySelectorAll('.work-folder-label-link').forEach((label) => {
+      label.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+    });
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selected = button.dataset.filter;
+        buttons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        cards.forEach((card) => {
+          const show = selected === 'all' || card.dataset.category === selected;
+          card.classList.toggle('is-hidden', !show);
+        });
+      });
+    });
+  </script>
+
+<script>
+  (() => {
+    let isNavigating = false;
+
+    function navigateTo(url) {
+      if (!url || isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+
+      if (event.deltaY < 0 && window.scrollY <= 10) {
+        navigateTo("service.html");
+      }
+
+      if (event.deltaY > 0) {
+        navigateTo("contact.html");
+      }
+    }, { passive: true });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+
+      const diff = touchStartY - event.touches[0].clientY;
+
+      if (diff < -40 && window.scrollY <= 10) {
+        navigateTo("service.html");
+      }
+
+      if (diff > 40) {
+        navigateTo("contact.html");
+      }
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    let isNavigating = false;
+    function navigateTo(url) {
+      if (!url || isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+      if (event.deltaY < 0 && window.scrollY <= 10) navigateTo("service.html");
+      if (event.deltaY > 0) navigateTo("contact.html");
+    }, { passive: true });
+    let touchStartY = null;
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+      const diff = touchStartY - event.touches[0].clientY;
+      if (diff < -40 && window.scrollY <= 10) navigateTo("service.html");
+      if (diff > 40) navigateTo("contact.html");
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    const scrollUpPage = "service.html";
+    const scrollDownPage = "contact.html";
+    const scrollDelay = 1300;
+    let locked = false;
+
+    function canNavigate(event) {
+      const target = event.target;
+      if (!target || !target.closest) return true;
+      return !target.closest("input, textarea, select, button, a, .modal, .popup, .scrollable, [data-normal-scroll]");
+    }
+
+    function goTo(page) {
+      if (!page || locked) return;
+      locked = true;
+      document.body.classList.add("page-scroll-leaving");
+      setTimeout(() => {
+        window.location.href = page;
+      }, 280);
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (!canNavigate(event)) return;
+      if (locked) {
+        event.preventDefault();
+        return;
+      }
+
+      if (Math.abs(event.deltaY) < 40) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (event.deltaY > 0 && scrollDownPage && atBottom) {
+        event.preventDefault();
+        goTo(scrollDownPage);
+      }
+
+      if (event.deltaY < 0 && scrollUpPage && atTop) {
+        event.preventDefault();
+        goTo(scrollUpPage);
+      }
+    }, { passive: false });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      if (!canNavigate(event)) return;
+      touchStartY = event.touches && event.touches[0] ? event.touches[0].clientY : null;
+    }, { passive: true });
+
+    window.addEventListener("touchend", (event) => {
+      if (touchStartY === null || locked) return;
+
+      const touchEndY = event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientY : null;
+      if (touchEndY === null) return;
+
+      const diff = touchStartY - touchEndY;
+      touchStartY = null;
+
+      if (Math.abs(diff) < 60) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (diff > 0 && scrollDownPage && atBottom) {
+        goTo(scrollDownPage);
+      }
+
+      if (diff < 0 && scrollUpPage && atTop) {
+        goTo(scrollUpPage);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

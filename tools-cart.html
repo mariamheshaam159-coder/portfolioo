@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools Cart | My Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Inter:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="tools-cart-page">
+  <main class="portfolio-shell tools-cart-shell" aria-label="Tools Cart interactive page">
+    <section class="tools-cart-header">
+      <div class="stat-block score-block">
+        <h2>Score</h2>
+        <div class="stat-pill score-pill" aria-live="polite">
+          <img src="assets/tools-score-box.png" alt="" aria-hidden="true" />
+          <span id="scoreValue">0</span>
+        </div>
+      </div>
+
+      <div class="tools-cart-title-wrap">
+        <h1 class="tools-cart-title">Tools Cart</h1>
+      </div>
+
+      <div class="stat-block time-block">
+        <h2>Time</h2>
+        <div class="stat-pill time-pill" aria-live="polite">
+          <img src="assets/tools-time-box.png" alt="" aria-hidden="true" />
+          <span id="timeValue">00:00.0</span>
+        </div>
+      </div>
+    </section>
+
+    <img class="tools-wave" src="assets/tools-wave.png" alt="" aria-hidden="true" />
+
+    <section class="tools-play-area" id="toolsPlayArea" aria-label="Game area">
+      <div class="tools-falling-layer" id="toolsFallingLayer" aria-hidden="true"></div>
+
+      <div class="tools-instructions" id="toolsInstructions">
+        Move the basket with your mouse and collect all 8 tools.
+        <span>Each tool = 10 points</span>
+      </div>
+
+      <div class="tools-finish-message hidden" id="toolsFinishMessage" aria-live="polite">
+        <p id="toolsFinishTitle">You collected 0 tools!</p>
+        <strong id="toolsFinishTime">Time: 00.00</strong>
+        <button class="tools-restart-btn" id="toolsRestartBtn" type="button">Play Again</button>
+      </div>
+
+      <div class="tools-basket-wrap" id="toolsBasketWrap">
+        <img class="tools-basket" id="toolsBasket" src="assets/tools-basket.png" alt="Hello Kitty basket" />
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+<script>
+  (() => {
+    let isNavigating = false;
+
+    function navigateTo(url) {
+      if (!url || isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+
+      if (event.deltaY < 0 && window.scrollY <= 10) {
+        navigateTo("about-me.html");
+      }
+
+      if (event.deltaY > 0) {
+        navigateTo("service.html");
+      }
+    }, { passive: true });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+
+      const diff = touchStartY - event.touches[0].clientY;
+
+      if (diff < -40 && window.scrollY <= 10) {
+        navigateTo("about-me.html");
+      }
+
+      if (diff > 40) {
+        navigateTo("service.html");
+      }
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    const scrollUpPage = "about-me.html";
+    const scrollDownPage = "service.html";
+    const scrollDelay = 1300;
+    let locked = false;
+
+    function canNavigate(event) {
+      const target = event.target;
+      if (!target || !target.closest) return true;
+      return !target.closest("input, textarea, select, button, a, .modal, .popup, .scrollable, [data-normal-scroll]");
+    }
+
+    function goTo(page) {
+      if (!page || locked) return;
+      locked = true;
+      document.body.classList.add("page-scroll-leaving");
+      setTimeout(() => {
+        window.location.href = page;
+      }, 280);
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (!canNavigate(event)) return;
+      if (locked) {
+        event.preventDefault();
+        return;
+      }
+
+      if (Math.abs(event.deltaY) < 40) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (event.deltaY > 0 && scrollDownPage && atBottom) {
+        event.preventDefault();
+        goTo(scrollDownPage);
+      }
+
+      if (event.deltaY < 0 && scrollUpPage && atTop) {
+        event.preventDefault();
+        goTo(scrollUpPage);
+      }
+    }, { passive: false });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      if (!canNavigate(event)) return;
+      touchStartY = event.touches && event.touches[0] ? event.touches[0].clientY : null;
+    }, { passive: true });
+
+    window.addEventListener("touchend", (event) => {
+      if (touchStartY === null || locked) return;
+
+      const touchEndY = event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientY : null;
+      if (touchEndY === null) return;
+
+      const diff = touchStartY - touchEndY;
+      touchStartY = null;
+
+      if (Math.abs(diff) < 60) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (diff > 0 && scrollDownPage && atBottom) {
+        goTo(scrollDownPage);
+      }
+
+      if (diff < 0 && scrollUpPage && atTop) {
+        goTo(scrollUpPage);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

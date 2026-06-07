@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="whatdo-page service-page">
+  <div class="custom-cursor" aria-hidden="true"></div>
+
+  <main class="whatdo-shell">
+    <section class="whatdo-frame" aria-label="What I Do">
+      <span class="decor decor-heart decor-heart-one">♥</span>
+      <span class="decor decor-heart decor-heart-two">♥</span>
+      <span class="decor decor-sparkle decor-sparkle-one">✦</span>
+      <span class="decor decor-sparkle decor-sparkle-two">✦</span>
+      <span class="decor decor-sparkle decor-sparkle-three">✦</span>
+      <img src="assets/whatido-neon-bow.png" alt="" class="frame-bow" />
+<header class="whatdo-heading">
+        <h1>What I <span>Do</span></h1>
+      </header>
+
+      <div class="whatdo-stack">
+        <div class="whatdo-intro-panel is-visible" aria-live="polite">
+          <p>
+            I create thoughtful visual experiences that combine design, storytelling, and emotion.
+            From branding and Editing to social media, print, motion, and video editing, I focus on
+            building work that feels visually refined, meaningful, and memorable.
+          </p>
+        </div>
+
+        <article class="whatdo-folder" data-index="0">
+          <button class="whatdo-tab" type="button" aria-expanded="false">
+            <span class="tab-title">Branding</span>
+          </button>
+          <div class="whatdo-content">
+            <div class="whatdo-copy">
+              <p>I build meaningful visual identities that capture the essence of your brand and create lasting connections</p>
+              <ul>
+                <li>Logo Design</li>
+                <li>Brand Identity</li>
+                <li>Moodboards</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="whatdo-folder" data-index="1">
+          <button class="whatdo-tab" type="button" aria-expanded="false">
+            <span class="tab-title">Editing</span>
+          </button>
+          <div class="whatdo-content">
+            <div class="whatdo-copy">
+              <p>I design thoughtful digital experiences that are functional and centered around real user needs</p>
+              <ul>
+                <li>User Flows</li>
+                <li>Wireframes</li>
+                <li>Prototyping</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="whatdo-folder" data-index="2">
+          <button class="whatdo-tab" type="button" aria-expanded="false">
+            <span class="tab-title">Social Media</span>
+          </button>
+          <div class="whatdo-content">
+            <div class="whatdo-copy">
+              <p>I create visuals that help brands stand out, connect with their audience, and drive real impact</p>
+              <ul>
+                <li>Posts &amp; Stories</li>
+                <li>Campaign Design</li>
+                <li>Content Layout</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="whatdo-folder" data-index="3">
+          <button class="whatdo-tab" type="button" aria-expanded="false">
+            <span class="tab-title">Print Design</span>
+          </button>
+          <div class="whatdo-content">
+            <div class="whatdo-copy">
+              <p>I craft refined print work that combines clarity, aesthetics, and purpose</p>
+              <ul>
+                <li>Posters</li>
+                <li>Flyers</li>
+                <li>Editorial Layouts</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="whatdo-folder" data-index="4">
+          <button class="whatdo-tab" type="button" aria-expanded="false">
+            <span class="tab-title">Video Editing</span>
+          </button>
+          <div class="whatdo-content">
+            <div class="whatdo-copy">
+              <p>I shape stories through editing, pacing, and rhythm to deliver content that captivates and inspires</p>
+              <ul>
+                <li>Reels &amp; Short videos</li>
+                <li>Transitions</li>
+                <li>Visual Storytelling</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+<script>
+  (() => {
+    let isNavigating = false;
+
+    function navigateTo(url) {
+      if (!url || isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+
+      if (event.deltaY < 0 && window.scrollY <= 10) {
+        navigateTo("tools-cart.html");
+      }
+
+      if (event.deltaY > 0) {
+        navigateTo("work.html");
+      }
+    }, { passive: true });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+
+      const diff = touchStartY - event.touches[0].clientY;
+
+      if (diff < -40 && window.scrollY <= 10) {
+        navigateTo("tools-cart.html");
+      }
+
+      if (diff > 40) {
+        navigateTo("work.html");
+      }
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    let isNavigating = false;
+
+    function navigateTo(url) {
+      if (!url || isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+
+      if (event.deltaY < 0 && window.scrollY <= 10) {
+        navigateTo("tools-cart.html");
+      }
+
+      if (event.deltaY > 0) {
+        navigateTo("work.html");
+      }
+    }, { passive: true });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+
+      const diff = touchStartY - event.touches[0].clientY;
+
+      if (diff < -40 && window.scrollY <= 10) {
+        navigateTo("tools-cart.html");
+      }
+
+      if (diff > 40) {
+        navigateTo("work.html");
+      }
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    const scrollUpPage = "tools-cart.html";
+    const scrollDownPage = "work.html";
+    const scrollDelay = 1300;
+    let locked = false;
+
+    function canNavigate(event) {
+      const target = event.target;
+      if (!target || !target.closest) return true;
+      return !target.closest("input, textarea, select, button, a, .modal, .popup, .scrollable, [data-normal-scroll]");
+    }
+
+    function goTo(page) {
+      if (!page || locked) return;
+      locked = true;
+      document.body.classList.add("page-scroll-leaving");
+      setTimeout(() => {
+        window.location.href = page;
+      }, 280);
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (!canNavigate(event)) return;
+      if (locked) {
+        event.preventDefault();
+        return;
+      }
+
+      if (Math.abs(event.deltaY) < 40) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (event.deltaY > 0 && scrollDownPage && atBottom) {
+        event.preventDefault();
+        goTo(scrollDownPage);
+      }
+
+      if (event.deltaY < 0 && scrollUpPage && atTop) {
+        event.preventDefault();
+        goTo(scrollUpPage);
+      }
+    }, { passive: false });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      if (!canNavigate(event)) return;
+      touchStartY = event.touches && event.touches[0] ? event.touches[0].clientY : null;
+    }, { passive: true });
+
+    window.addEventListener("touchend", (event) => {
+      if (touchStartY === null || locked) return;
+
+      const touchEndY = event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientY : null;
+      if (touchEndY === null) return;
+
+      const diff = touchStartY - touchEndY;
+      touchStartY = null;
+
+      if (Math.abs(diff) < 60) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (diff > 0 && scrollDownPage && atBottom) {
+        goTo(scrollDownPage);
+      }
+
+      if (diff < 0 && scrollUpPage && atTop) {
+        goTo(scrollUpPage);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>

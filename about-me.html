@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Inter:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="about-card-page about-me-page">
+  <main class="about-card-scene">
+    <img src="assets/about-bg.png" alt="" class="about-bg" />
+
+    <section class="about-frame-shell" data-about-object="frame" aria-label="About Mariam Hesham">
+      <img src="assets/about-frame.png" alt="" class="about-outer-frame" />
+
+      <div class="about-content-wrap">
+        <article class="about-window-card" data-about-object="window">
+          <img src="assets/about-window.png" alt="" class="about-window-img" />
+          <div class="about-window-text">
+            <h1>Mariam Hesham</h1>
+            <p>
+              Multidisciplinary designer creating refined, emotional, and meaningful visual experiences.
+              I focus on branding, visual identity, and 3D environments, blending storytelling with soft,
+              sophisticated aesthetics to create memorable and impactful designs.
+            </p>
+          </div>
+        </article>
+
+        <figure class="about-id-card elastic-3d-card" data-about-object="card" aria-label="Draggable 3D card">
+          <svg class="about-card-rope" aria-hidden="true">
+            <path class="about-card-rope-path" d="" />
+          </svg>
+          <div class="about-card-physics">
+            <img src="assets/about-id-card-clean.png" alt="3D Card" />
+          </div>
+        </figure>
+      </div>
+    </section>
+  </main>
+<script src="script.js"></script>
+
+
+
+
+<script>
+  (() => {
+    let isNavigating = false;
+
+    function navigateTo(url) {
+      if (isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+
+      if (event.deltaY < 0 && window.scrollY <= 10) {
+        navigateTo("home.html");
+      }
+
+      if (event.deltaY > 0) {
+        navigateTo("tools-cart.html");
+      }
+    }, { passive: true });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+
+      const diff = touchStartY - event.touches[0].clientY;
+
+      if (diff < -40 && window.scrollY <= 10) {
+        navigateTo("home.html");
+      }
+
+      if (diff > 40) {
+        navigateTo("tools-cart.html");
+      }
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    let isNavigating = false;
+
+    function navigateTo(url) {
+      if (!url || isNavigating) return;
+      isNavigating = true;
+      window.location.href = url;
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) < 25) return;
+
+      if (event.deltaY < 0 && window.scrollY <= 10) {
+        navigateTo("home.html");
+      }
+
+      if (event.deltaY > 0) {
+        navigateTo("tools-cart.html");
+      }
+    }, { passive: true });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      touchStartY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (event) => {
+      if (touchStartY === null) return;
+
+      const diff = touchStartY - event.touches[0].clientY;
+
+      if (diff < -40 && window.scrollY <= 10) {
+        navigateTo("home.html");
+      }
+
+      if (diff > 40) {
+        navigateTo("tools-cart.html");
+      }
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (() => {
+    const scrollUpPage = "home.html";
+    const scrollDownPage = "tools-cart.html";
+    const scrollDelay = 1300;
+    let locked = false;
+
+    function canNavigate(event) {
+      const target = event.target;
+      if (!target || !target.closest) return true;
+      return !target.closest("input, textarea, select, button, a, .modal, .popup, .scrollable, [data-normal-scroll]");
+    }
+
+    function goTo(page) {
+      if (!page || locked) return;
+      locked = true;
+      document.body.classList.add("page-scroll-leaving");
+      setTimeout(() => {
+        window.location.href = page;
+      }, 280);
+    }
+
+    window.addEventListener("wheel", (event) => {
+      if (!canNavigate(event)) return;
+      if (locked) {
+        event.preventDefault();
+        return;
+      }
+
+      if (Math.abs(event.deltaY) < 40) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (event.deltaY > 0 && scrollDownPage && atBottom) {
+        event.preventDefault();
+        goTo(scrollDownPage);
+      }
+
+      if (event.deltaY < 0 && scrollUpPage && atTop) {
+        event.preventDefault();
+        goTo(scrollUpPage);
+      }
+    }, { passive: false });
+
+    let touchStartY = null;
+
+    window.addEventListener("touchstart", (event) => {
+      if (!canNavigate(event)) return;
+      touchStartY = event.touches && event.touches[0] ? event.touches[0].clientY : null;
+    }, { passive: true });
+
+    window.addEventListener("touchend", (event) => {
+      if (touchStartY === null || locked) return;
+
+      const touchEndY = event.changedTouches && event.changedTouches[0] ? event.changedTouches[0].clientY : null;
+      if (touchEndY === null) return;
+
+      const diff = touchStartY - touchEndY;
+      touchStartY = null;
+
+      if (Math.abs(diff) < 60) return;
+
+      const doc = document.documentElement;
+      const scrollTop = window.scrollY || doc.scrollTop || 0;
+      const maxScroll = Math.max(0, doc.scrollHeight - window.innerHeight);
+      const atTop = scrollTop <= 8;
+      const atBottom = scrollTop >= maxScroll - 8;
+
+      if (diff > 0 && scrollDownPage && atBottom) {
+        goTo(scrollDownPage);
+      }
+
+      if (diff < 0 && scrollUpPage && atTop) {
+        goTo(scrollUpPage);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>
